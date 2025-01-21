@@ -7,7 +7,23 @@ function App() {
   const [tasks, setTasks] = useState([]);
 
   const addTask = (task) => {
-    setTasks((prevTasks) => [...prevTasks, { id: Date.now(), text: task }]);
+    setTasks((prevTasks) => [
+      ...prevTasks,
+      { id: Date.now(), text: task, status: 0 },
+    ]);
+  };
+
+  const toggleTaskStatus = (taskId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              status: task.status === 0 ? 1 : 0,
+            }
+          : task
+      )
+    );
   };
 
   useEffect(() => {
@@ -20,7 +36,7 @@ function App() {
       <div className="container mx-auto flex-1 flex flex-col gap-[1.6vw] md:gap-[1vw] p-[1.6vw] md:p-[1vw]">
         <HeaderSection />
         <InputSection onAddTask={addTask} />
-        <TaskSection />
+        <TaskSection tasks={tasks} onToggle={toggleTaskStatus} />
       </div>
     </div>
   );
