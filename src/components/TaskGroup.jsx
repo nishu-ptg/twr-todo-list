@@ -14,8 +14,6 @@ const TaskGroup = ({ type, tasks, onToggle }) => {
         >
           <h2 className="text-lg font-bold text-center">{title}</h2>
         </Card>
-        {/* <TaskItem>ListItem</TaskItem>
-        <TaskItem>ListItem</TaskItem> */}
         {tasks.length > 0 ? (
           tasks.map((task) => (
             <TaskItem key={task.id} task={task} onToggle={onToggle} />

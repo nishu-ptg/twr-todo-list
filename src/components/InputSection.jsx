@@ -33,7 +33,7 @@ const InputSection = ({ onAddTask }) => {
             <div className="col-span-1">
               <div onClick={handleAdd}>
                 <Card
-                  bg="bg-gradient-to-br from-indigo-400 to-indigo-600"
+                  bg="bg-gradient-to-br from-indigo-300 to-indigo-500"
                   additionalClass="cursor-pointer flex justify-center items-center font-bold text-yellow-200"
                 >
                   <p>Add</p>
