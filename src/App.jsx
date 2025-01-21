@@ -14,8 +14,29 @@ function App() {
   const addTask = (task) => {
     setTasks((prevTasks) => [
       ...prevTasks,
-      { id: Date.now(), text: task, status: 0 },
+      {
+        id: Date.now(),
+        text: task,
+        status: 0,
+        history: [{ text: task, date: new Date().toISOString() }],
+      },
     ]);
+  };
+
+  const addToHistory = (taskId, newText) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              history: [
+                ...task.history,
+                { text: newText, date: new Date().toISOString() },
+              ],
+            }
+          : task
+      )
+    );
   };
 
   const toggleTaskStatus = (taskId) => {
