@@ -6,8 +6,9 @@ const TaskInfo = ({
   task,
   editTask,
   deleteTask,
+  // openModal,
   closeModal,
-  setModalContent,
+  // setModalContent,
 }) => {
   console.log(task);
   console.log("Task text:", task.text);
@@ -21,6 +22,7 @@ const TaskInfo = ({
     const newText = prompt("Edit Task", task.text);
     console.log("newText:", newText);
     editTask(task.id, newText.trim());
+    /* *
     setModalContent(
       // <Card>
       //   <p>qwe</p>
@@ -32,8 +34,19 @@ const TaskInfo = ({
         deleteTask={deleteTask}
         closeModal={closeModal}
       />
-    );
+    ); /* */
     // closeModal();
+    // openModal(
+    //   "Task Details",
+    //   <TaskInfo
+    //     task={task}
+    //     editTask={editTask}
+    //     deleteTask={deleteTask}
+    //     openModal={openModal}
+    //     closeModal={closeModal}
+    //     setModalContent={setModalContent}
+    //   />
+    // );
   };
   const handleDelete = () => {
     const message = `Are you sure you want to delete the task: "${task.text}"?`;

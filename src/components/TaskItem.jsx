@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "./Card";
 import TaskToggleButton from "./TaskToggleButton";
 import TaskInfo from "./TaskInfo";
@@ -20,10 +20,25 @@ const TaskItem = ({
         editTask={editTask}
         deleteTask={deleteTask}
         closeModal={closeModal}
-        setModalContent={setModalContent}
       />
     );
   };
+
+  // Update modal content when the task changes
+  /* */
+  useEffect(() => {
+    if (openModal && setModalContent) {
+      setModalContent(
+        <TaskInfo
+          task={task}
+          editTask={editTask}
+          deleteTask={deleteTask}
+          closeModal={closeModal}
+        />
+      );
+    }
+  }, [task]);
+  /* */
 
   return (
     <Card
