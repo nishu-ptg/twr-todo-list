@@ -2,7 +2,14 @@ import React from "react";
 import Card from "./Card";
 import TaskItem from "./TaskItem";
 
-const TaskGroup = ({ type, tasks, onToggle, openModal }) => {
+const TaskGroup = ({
+  type,
+  tasks,
+  onToggle,
+  openModal,
+  closeModal,
+  editTask,
+}) => {
   const title = type === "complete" ? "Complete" : "Incomplete";
   return (
     <Card additionalClass="flex-1">
@@ -21,6 +28,8 @@ const TaskGroup = ({ type, tasks, onToggle, openModal }) => {
               task={task}
               onToggle={onToggle}
               openModal={openModal}
+              closeModal={closeModal}
+              editTask={editTask}
             />
           ))
         ) : (

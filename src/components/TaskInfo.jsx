@@ -2,7 +2,18 @@ import React from "react";
 import TaskHistory from "./TaskHistory";
 import Card from "./Card";
 
-const TaskInfo = ({ task }) => {
+const TaskInfo = ({ task, editTask, closeModal }) => {
+  console.log(task);
+  console.log("Task text:", task.text);
+  console.log("Task history:", task.history);
+
+  // if (!task) return null;
+
+  const handleEdit = () => {
+    const newText = prompt("Edit Task", task.text);
+    editTask(task.id, newText.trim());
+    closeModal();
+  };
   return (
     <div>
       <Card
@@ -13,7 +24,11 @@ const TaskInfo = ({ task }) => {
         <div className="flex-1">
           <h3 className="font-bold text-xl text-indigo-700">{task.text}</h3>
         </div>
-        <div title="Edit Task" className="cursor-pointer flex justify-center">
+        <div
+          title="Edit Task"
+          className="cursor-pointer flex justify-center"
+          onClick={handleEdit}
+        >
           <Card
             padding="py-0 px-2"
             shadow="shadow-sm hover:shadow-lg"
@@ -21,7 +36,7 @@ const TaskInfo = ({ task }) => {
             title="Edit"
           >
             <button>
-              <i class="fa-solid fa-pen-to-square text-green-500"></i>
+              <i className="fa-solid fa-pen-to-square text-green-500"></i>
             </button>
           </Card>
         </div>
@@ -33,7 +48,7 @@ const TaskInfo = ({ task }) => {
             additionalClass="flex justify-center font-semibold cursor-pointer"
           >
             <button>
-              <i class="fa-solid fa-ban text-red-500"></i>
+              <i className="fa-solid fa-ban text-red-500"></i>
             </button>
           </Card>
         </div>

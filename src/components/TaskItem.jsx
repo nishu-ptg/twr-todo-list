@@ -3,9 +3,12 @@ import Card from "./Card";
 import TaskToggleButton from "./TaskToggleButton";
 import TaskInfo from "./TaskInfo";
 
-const TaskItem = ({ task, onToggle, openModal }) => {
+const TaskItem = ({ task, onToggle, openModal, closeModal, editTask }) => {
   const handleDetailsClick = () => {
-    openModal("Task Details", <TaskInfo task={task} />);
+    openModal(
+      "Task Details",
+      <TaskInfo task={task} editTask={editTask} closeModal={closeModal} />
+    );
   };
 
   return (

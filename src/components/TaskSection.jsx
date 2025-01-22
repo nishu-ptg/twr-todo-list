@@ -1,7 +1,7 @@
 import React from "react";
 import TaskGroup from "./TaskGroup";
 
-const TaskSection = ({ tasks, onToggle, openModal }) => {
+const TaskSection = ({ tasks, onToggle, openModal, closeModal, editTask }) => {
   const incompleteTasks = tasks.filter((task) => task.status === 0);
   const completeTasks = tasks.filter((task) => task.status === 1);
 
@@ -12,12 +12,16 @@ const TaskSection = ({ tasks, onToggle, openModal }) => {
         onToggle={onToggle}
         tasks={incompleteTasks}
         openModal={openModal}
+        closeModal={closeModal}
+        editTask={editTask}
       />
       <TaskGroup
         type="complete"
         onToggle={onToggle}
         tasks={completeTasks}
         openModal={openModal}
+        closeModal={closeModal}
+        editTask={editTask}
       />
     </div>
   );

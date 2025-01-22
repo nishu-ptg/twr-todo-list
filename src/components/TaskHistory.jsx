@@ -7,7 +7,7 @@ const TaskHistory = ({ task }) => {
         <thead>
           <tr className="bg-indigo-100 text-left">
             <th className="border border-indigo-300 px-4 py-2">#</th>
-            <th className="border border-indigo-300 px-4 py-2">Task</th>
+            <th className="border border-indigo-300 px-4 py-2">Edit History</th>
             <th className="border border-indigo-300 px-4 py-2">Date & Time</th>
           </tr>
         </thead>

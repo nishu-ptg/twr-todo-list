@@ -23,6 +23,23 @@ function App() {
     ]);
   };
 
+  const editTask = (taskId, newText) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              text: newText,
+              history: [
+                ...task.history,
+                { text: newText, date: new Date().toISOString() },
+              ],
+            }
+          : task
+      )
+    );
+  };
+
   const addToHistory = (taskId, newText) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -53,7 +70,7 @@ function App() {
   };
 
   useEffect(() => {
-    console.clear();
+    // console.clear();
     console.log(tasks);
   }, [tasks]);
 
@@ -78,6 +95,8 @@ function App() {
           tasks={tasks}
           onToggle={toggleTaskStatus}
           openModal={openModal}
+          closeModal={closeModal}
+          editTask={editTask}
         />
 
         <Modal isOpen={isModalOpen} closeModal={closeModal} title={modalTitle}>
