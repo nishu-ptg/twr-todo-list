@@ -10,9 +10,31 @@ const TrashView = ({ deletedCount, tasks, restoreTask, deleteTask }) => {
 
   const handleDelete = (taskId, taskText) => {
     const message = `Are you sure you want to delete the task "${taskText}" permanently?`;
-    if (window.confirm(message)) {
-      deleteTask(taskId);
-    }
+    if (!window.confirm(message)) return;
+
+    deleteTask(taskId);
+  };
+
+  const handleRestoreAll = () => {
+    const message = `Are you sure you want to restore all deleted task(s)?`;
+    if (!window.confirm(message)) return;
+
+    tasks.map((task) => {
+      if (task.delAt) {
+        return restoreTask(task.id);
+      }
+    });
+  };
+
+  const handleRemoveAll = () => {
+    const message = `Are you sure you want to permanently remove all deleted task(s)?`;
+    if (!window.confirm(message)) return;
+
+    tasks.map((task) => {
+      if (task.delAt) {
+        return deleteTask(task.id);
+      }
+    });
   };
 
   if (!deletedCount) {
@@ -21,6 +43,40 @@ const TrashView = ({ deletedCount, tasks, restoreTask, deleteTask }) => {
 
   return (
     <div className="overflow-x-auto">
+      <div className="flex justify-center items-center gap-2 pb-6">
+        <div
+          title="Restore"
+          className="cursor-pointer flex justify-center"
+          onClick={handleRestoreAll}
+        >
+          <Card
+            padding="py-0 px-2"
+            shadow="shadow-sm hover:shadow-lg"
+            additionalClass="flex justify-center border border-green-500"
+          >
+            <button>
+              <i className="fa-solid fa-rotate-left text-green-500"></i>
+              &nbsp; Restore All
+            </button>
+          </Card>
+        </div>
+        <div
+          title="Remove Permanently"
+          className="cursor-pointer flex justify-center"
+          onClick={handleRemoveAll}
+        >
+          <Card
+            padding="py-0 px-2"
+            shadow="shadow-sm hover:shadow-lg"
+            additionalClass="flex justify-center border border-red-500"
+          >
+            <button>
+              <i className="fa-solid fa-ban text-red-500"></i>
+              &nbsp; Remove All
+            </button>
+          </Card>
+        </div>
+      </div>
       <table className="table-auto w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-indigo-100 text-left">
