@@ -103,6 +103,8 @@ function App() {
           tasks={tasks}
           restoreTask={toggleDelete}
           deleteTask={deleteTask}
+          modalTitle={modalTitle}
+          setModalContent={setModalContent}
         />
         <InputSection onAddTask={addTask} />
         <TaskSection
@@ -113,6 +115,7 @@ function App() {
           editTask={editTask}
           // deleteTask={deleteTask}
           deleteTask={toggleDelete}
+          modalTitle={modalTitle}
           setModalContent={setModalContent}
         />
 

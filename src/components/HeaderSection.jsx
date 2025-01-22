@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "./Card";
 import TrashView from "./TrashView";
 
@@ -9,6 +9,8 @@ const HeaderSection = ({
   tasks,
   restoreTask,
   deleteTask,
+  modalTitle,
+  setModalContent,
 }) => {
   const handleTrashClick = () => {
     openModal(
@@ -21,6 +23,19 @@ const HeaderSection = ({
       />
     );
   };
+
+  useEffect(() => {
+    if (openModal && modalTitle === "Deleted Tasks") {
+      setModalContent(
+        <TrashView
+          deletedCount={deletedCount}
+          tasks={tasks}
+          restoreTask={restoreTask}
+          deleteTask={deleteTask}
+        />
+      );
+    }
+  }, [tasks]);
 
   return (
     <Card

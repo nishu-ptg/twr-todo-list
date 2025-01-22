@@ -10,6 +10,7 @@ const TaskGroup = ({
   closeModal,
   editTask,
   deleteTask,
+  modalTitle,
   setModalContent,
 }) => {
   const title = type === "complete" ? "Complete" : "Incomplete";
@@ -33,6 +34,7 @@ const TaskGroup = ({
               closeModal={closeModal}
               editTask={editTask}
               deleteTask={deleteTask}
+              modalTitle={modalTitle}
               setModalContent={setModalContent}
             />
           ))

@@ -8,6 +8,7 @@ const TaskSection = ({
   closeModal,
   editTask,
   deleteTask,
+  modalTitle,
   setModalContent,
 }) => {
   // const incompleteTasks = tasks.filter((task) => task.status === 0);
@@ -29,6 +30,7 @@ const TaskSection = ({
         closeModal={closeModal}
         editTask={editTask}
         deleteTask={deleteTask}
+        modalTitle={modalTitle}
         setModalContent={setModalContent}
       />
       <TaskGroup
@@ -39,6 +41,7 @@ const TaskSection = ({
         closeModal={closeModal}
         editTask={editTask}
         deleteTask={deleteTask}
+        modalTitle={modalTitle}
         setModalContent={setModalContent}
       />
     </div>

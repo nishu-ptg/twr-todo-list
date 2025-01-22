@@ -10,6 +10,7 @@ const TaskItem = ({
   closeModal,
   editTask,
   deleteTask,
+  modalTitle,
   setModalContent,
 }) => {
   const handleDetailsClick = () => {
@@ -27,7 +28,7 @@ const TaskItem = ({
   // Update modal content when the task changes
   /* */
   useEffect(() => {
-    if (openModal && setModalContent) {
+    if (openModal && modalTitle === "Task Details") {
       setModalContent(
         <TaskInfo
           task={task}
