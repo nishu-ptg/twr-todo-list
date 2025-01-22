@@ -5,7 +5,10 @@ import TaskSection from "./components/TaskSection";
 import Modal from "./components/Modal";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("taskList");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
@@ -33,6 +36,15 @@ function App() {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
+  const toggleTaskStatus = (taskId) => {
+    setTasks((prevTasks) =>
+      updateTask(prevTasks, taskId, {
+        status:
+          prevTasks.find((task) => task.id === taskId).status === 0 ? 1 : 0,
+      })
+    );
+  };
+
   const editTask = (taskId, newText) => {
     setTasks((prevTasks) =>
       updateTask(prevTasks, taskId, {
@@ -45,16 +57,12 @@ function App() {
     );
   };
 
-  const toggleTaskStatus = (taskId) => {
-    setTasks((prevTasks) =>
-      updateTask(prevTasks, taskId, {
-        status:
-          prevTasks.find((task) => task.id === taskId).status === 0 ? 1 : 0,
-      })
-    );
+  const deleteTask = (taskId) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
 
   useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(tasks));
     // console.clear();
     console.log(tasks);
   }, [tasks]);
@@ -82,6 +90,7 @@ function App() {
           openModal={openModal}
           closeModal={closeModal}
           editTask={editTask}
+          deleteTask={deleteTask}
         />
 
         <Modal isOpen={isModalOpen} closeModal={closeModal} title={modalTitle}>

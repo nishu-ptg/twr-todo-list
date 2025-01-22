@@ -2,7 +2,7 @@ import React from "react";
 import TaskHistory from "./TaskHistory";
 import Card from "./Card";
 
-const TaskInfo = ({ task, editTask, closeModal }) => {
+const TaskInfo = ({ task, editTask, deleteTask, closeModal }) => {
   console.log(task);
   console.log("Task text:", task.text);
   console.log("Task history:", task.history);
@@ -13,6 +13,13 @@ const TaskInfo = ({ task, editTask, closeModal }) => {
     const newText = prompt("Edit Task", task.text);
     editTask(task.id, newText.trim());
     closeModal();
+  };
+  const handleDelete = () => {
+    const message = `Are you sure you want to delete the task: "${task.text}"?`;
+    if (window.confirm(message)) {
+      deleteTask(task.id);
+      closeModal();
+    }
   };
   return (
     <div>
@@ -41,7 +48,11 @@ const TaskInfo = ({ task, editTask, closeModal }) => {
           </Card>
         </div>
 
-        <div title="Delete Task" className="cursor-pointer flex justify-center">
+        <div
+          title="Delete Task"
+          className="cursor-pointer flex justify-center"
+          onClick={handleDelete}
+        >
           <Card
             padding="py-0 px-2"
             shadow="shadow-sm hover:shadow-lg"
