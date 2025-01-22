@@ -9,8 +9,14 @@ const TaskSection = ({
   editTask,
   deleteTask,
 }) => {
-  const incompleteTasks = tasks.filter((task) => task.status === 0);
-  const completeTasks = tasks.filter((task) => task.status === 1);
+  // const incompleteTasks = tasks.filter((task) => task.status === 0);
+  // const completeTasks = tasks.filter((task) => task.status === 1);
+  const incompleteTasks = tasks.filter(
+    (task) => task.status === 0 && task.delAt === undefined
+  );
+  const completeTasks = tasks.filter(
+    (task) => task.status === 1 && task.delAt === undefined
+  );
 
   return (
     <div className="flex flex-1 gap-[1.6vw] md:gap-[1vw]">

@@ -60,6 +60,20 @@ function App() {
   const deleteTask = (taskId) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
+  const toggleDelete = (taskId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              delAt: task.delAt ? undefined : new Date().toISOString(),
+            }
+          : task
+      )
+    );
+  };
+
+  const deletedCount = tasks.filter((task) => task.delAt).length;
 
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(tasks));
@@ -82,7 +96,14 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-indigo-100 to-indigo-50 flex flex-col justify-center items-center text-gray-800">
       <div className="container mx-auto flex-1 flex flex-col gap-[1.6vw] md:gap-[1vw] p-[1.6vw] md:p-[1vw]">
-        <HeaderSection />
+        <HeaderSection
+          deletedCount={deletedCount}
+          openModal={openModal}
+          closeModal={closeModal}
+          tasks={tasks}
+          restoreTask={toggleDelete}
+          deleteTask={deleteTask}
+        />
         <InputSection onAddTask={addTask} />
         <TaskSection
           tasks={tasks}
@@ -90,7 +111,8 @@ function App() {
           openModal={openModal}
           closeModal={closeModal}
           editTask={editTask}
-          deleteTask={deleteTask}
+          // deleteTask={deleteTask}
+          deleteTask={toggleDelete}
         />
 
         <Modal isOpen={isModalOpen} closeModal={closeModal} title={modalTitle}>
