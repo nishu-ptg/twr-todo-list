@@ -10,6 +10,7 @@ const TaskItem = ({
   closeModal,
   editTask,
   deleteTask,
+  setModalContent,
 }) => {
   const handleDetailsClick = () => {
     openModal(
@@ -19,6 +20,7 @@ const TaskItem = ({
         editTask={editTask}
         deleteTask={deleteTask}
         closeModal={closeModal}
+        setModalContent={setModalContent}
       />
     );
   };

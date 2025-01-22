@@ -1,18 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TaskHistory from "./TaskHistory";
 import Card from "./Card";
 
-const TaskInfo = ({ task, editTask, deleteTask, closeModal }) => {
+const TaskInfo = ({
+  task,
+  editTask,
+  deleteTask,
+  closeModal,
+  setModalContent,
+}) => {
   console.log(task);
   console.log("Task text:", task.text);
   console.log("Task history:", task.history);
+
+  useEffect(function () {}, [task]);
 
   // if (!task) return null;
 
   const handleEdit = () => {
     const newText = prompt("Edit Task", task.text);
+    console.log("newText:", newText);
     editTask(task.id, newText.trim());
-    closeModal();
+    setModalContent(
+      // <Card>
+      //   <p>qwe</p>
+      // </Card>
+      // "asd"
+      <TaskInfo
+        task={task}
+        editTask={editTask}
+        deleteTask={deleteTask}
+        closeModal={closeModal}
+      />
+    );
+    // closeModal();
   };
   const handleDelete = () => {
     const message = `Are you sure you want to delete the task: "${task.text}"?`;

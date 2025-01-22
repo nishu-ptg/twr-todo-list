@@ -78,7 +78,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(tasks));
     // console.clear();
-    console.log(tasks);
+    // console.log(tasks);
   }, [tasks]);
 
   const openModal = (title, content) => {
@@ -113,6 +113,7 @@ function App() {
           editTask={editTask}
           // deleteTask={deleteTask}
           deleteTask={toggleDelete}
+          setModalContent={setModalContent}
         />
 
         <Modal isOpen={isModalOpen} closeModal={closeModal} title={modalTitle}>
