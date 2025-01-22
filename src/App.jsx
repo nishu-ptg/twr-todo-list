@@ -11,61 +11,46 @@ function App() {
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState(null);
 
-  const addTask = (task) => {
-    setTasks((prevTasks) => [
-      ...prevTasks,
-      {
-        id: Date.now(),
-        text: task,
-        status: 0,
-        history: [{ text: task, date: new Date().toISOString() }],
-      },
-    ]);
+  const createHistoryEntry = (text) => ({
+    text,
+    date: new Date().toISOString(),
+  });
+
+  const updateTask = (tasks, taskId, updatedFields) => {
+    return tasks.map((task) =>
+      task.id === taskId ? { ...task, ...updatedFields } : task
+    );
+  };
+
+  const addTask = (taskText) => {
+    const newTask = {
+      id: Date.now(),
+      text: taskText,
+      status: 0,
+      history: [createHistoryEntry(taskText)],
+    };
+
+    setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
   const editTask = (taskId, newText) => {
     setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              text: newText,
-              history: [
-                ...task.history,
-                { text: newText, date: new Date().toISOString() },
-              ],
-            }
-          : task
-      )
-    );
-  };
-
-  const addToHistory = (taskId, newText) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              history: [
-                ...task.history,
-                { text: newText, date: new Date().toISOString() },
-              ],
-            }
-          : task
-      )
+      updateTask(prevTasks, taskId, {
+        text: newText,
+        history: [
+          ...prevTasks.find((task) => task.id === taskId).history,
+          createHistoryEntry(newText),
+        ],
+      })
     );
   };
 
   const toggleTaskStatus = (taskId) => {
     setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              status: task.status === 0 ? 1 : 0,
-            }
-          : task
-      )
+      updateTask(prevTasks, taskId, {
+        status:
+          prevTasks.find((task) => task.id === taskId).status === 0 ? 1 : 0,
+      })
     );
   };
 
